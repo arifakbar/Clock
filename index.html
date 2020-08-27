@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mode">
+        <label class="switch">
+            <input type="checkbox">
+            <span id="checkbox" class="slider round"></span>
+        </label>
+        <h5>Day Mode</h5>
+    </div>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    const deg = 6;
+    hr = document.querySelector('#hr');
+    mn = document.querySelector('#mn');
+    sc = document.querySelector('#sc');
+
+    setInterval(() => {
+        let day = new Date();
+        let hh = day.getHours() *30;
+        let mm = day.getMinutes() * deg;
+        let ss = day.getSeconds() * deg;
+
+        hr.style.transform = `rotateZ(${ (hh) + (mm/12) }deg)`;
+        mn.style.transform = `rotateZ(${mm}deg)`;
+        sc.style.transform = `rotateZ(${ss}deg)`;
+    })
+
+    
+    /*NIGHT SCENE :
+        root.style.setProperty('--bodyMain', '#1A1A1A');
+        root.style.setProperty('--shadow-nav', 'rgba(0,0,0,.8)');
+        root.style.setProperty('--black', 'white');
+        root.style.setProperty('--grey', 'white');
+
+    DAY SCENE :
+        root.style.setProperty('--bodyMain', 'white');
+        root.style.setProperty('--shadow-nav', '#E2E1E1');
+        root.style.setProperty('--black', 'black');
+        root.style.setProperty('--grey', 'rgb(105, 105, 105)');*/
+var root = document.documentElement;       
+var checkbox = document.getElementById('checkbox');       
+var nightMode = true;
+checkbox.addEventListener('click',function(){
+    if(nightMode == true){
+        root.style.setProperty('--bodyMain', '#fff');
+        root.style.setProperty('--main', 'black');
+        root.style.setProperty('--box-shadow', `-8px -8px 15px rgba(255, 255, 255, 0.5),
+                                10px 10px 10px rgba(0, 0, 0, 0.1),
+                                 inset -8px -8px 15px rgba(255, 255, 255, 0.5),
+                                inset 10px 10px 10px rgba(0, 0, 0, 0.1) `);
+        //root.style.setProperty('--shadow-nav', 'rgba(0,0,0,.8)');
+        //root.style.setProperty('--black', 'white');
+        //root.style.setProperty('--grey', 'white');
+        nightMode = false;
+    }
+    else{
+        root.style.setProperty('--bodyMain', '#091921');
+        root.style.setProperty('--main', 'white');
+        root.style.setProperty('--box-shadow', ` 0 -15px 15px rgba(255, 255, 255, 0.05),
+                                inset 0 -15px 15px rgba(255, 255, 255, 0.05),
+                                0 15px 15px rgba(0, 0, 0, 0.3),
+                                inset 0 15px 15px rgba(0, 0, 0, 0.3) `);
+        //root.style.setProperty('--black', 'black');
+        //root.style.setProperty('--grey', 'rgb(105, 105, 105)');
+        nightMode = true;
+    }
+})
+    
+</script>
+</html>
